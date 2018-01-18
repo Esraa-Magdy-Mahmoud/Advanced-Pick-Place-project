@@ -2,3 +2,6 @@
 
 # Advanced-Pick&Place-project
 In this Project, a perception pipeline is created to perform object recognition then successfully completed a tabletop pick and place operation using a PR2 robot in simulation.
+
+## Original repository :
+  * https://github.com/udacity/RoboND-Perception-Project
