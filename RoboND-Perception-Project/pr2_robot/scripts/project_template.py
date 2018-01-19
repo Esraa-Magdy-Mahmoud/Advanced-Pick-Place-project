@@ -52,6 +52,7 @@ def pcl_callback(pcl_msg):
 # Exercise-2 TODOs:
 
     # TODO: Convert ROS msg to PCL data
+    cloud = ros_to_pcl(pcl_msg)
     
     # TODO: Statistical Outlier Filtering
 
@@ -68,8 +69,10 @@ def pcl_callback(pcl_msg):
     # TODO: Create Cluster-Mask Point Cloud to visualize each cluster separately
 
     # TODO: Convert PCL data to ROS messages
+    cloud = pcl_to_ros(cloud)
 
     # TODO: Publish ROS messages
+    pcl_cloud_pub.publish(cloud)
 
 # Exercise-3 TODOs:
 
@@ -137,10 +140,13 @@ def pr2_mover(object_list):
 if __name__ == '__main__':
 
     # TODO: ROS node initialization
+    rospy.init_node('obj_recognition', anonymous=True)
 
     # TODO: Create Subscribers
+    pcl_sub = rospy.Subscriber("/pr2/world/points", pc2.PointCloud2, pcl_callback, queue_size=1)
 
     # TODO: Create Publishers
+    pcl_cloud_pub = rospy.Publisher("/pcl_mycloud", PointCloud2, queue_size=1)
 
     # TODO: Load Model From disk
 
@@ -148,3 +154,6 @@ if __name__ == '__main__':
     get_color_list.color_list = []
 
     # TODO: Spin while node is not shutdown
+    while not rospy.is_shutdown():
+    	 rospy.spin()
+
